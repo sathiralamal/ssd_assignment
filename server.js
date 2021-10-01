@@ -39,7 +39,7 @@ var Storage = multer.diskStorage({
 var upload = multer({
   storage: Storage,
 }).single("file"); //Field name and max count
-
+// const upload = multer({ dest: 'uploads/' })
 app.get("/", (req, res) => {
   if (!authed) {
     // Generate an OAuth URL and redirect there
@@ -74,6 +74,7 @@ app.get("/", (req, res) => {
 app.post("/upload", (req, res) => {
   upload(req, res, function (err) {
     if (err) {
+        console.log("heloloooooooooooooooooooooooooooooooooooo")
       console.log(err);
       return res.end("Something went wrong");
     } else {
@@ -112,7 +113,7 @@ app.get('/logout',(req,res) => {
     res.redirect('/')
 })
 
-app.get("/google/callback", function (req, res) {
+app.get("/oauth", function (req, res) {
   const code = req.query.code;
   if (code) {
     // Get an access token based on our OAuth code
@@ -133,6 +134,6 @@ app.get("/google/callback", function (req, res) {
   }
 });
 
-app.listen(5000, () => {
+app.listen(8082, () => {
   console.log("App is listening on Port 5000");
 });
