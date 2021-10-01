@@ -3,9 +3,10 @@ const fs = require("fs");
 const express = require("express");
 const multer = require("multer");
 const OAuth2Data = require("./client_secret.json");
-var name,pic
+var name,pic,data=[]
 
 const { google } = require("googleapis");
+const { datastore } = require("googleapis/build/src/apis/datastore");
 
 const app = express();
 
@@ -23,7 +24,7 @@ var authed = false;
 
 // If modifying these scopes, delete token.json.
 const SCOPES =
-  "https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/userinfo.profile";
+  "https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/drive.metadata.readonly";
 
 app.set("view engine", "ejs");
 
@@ -41,6 +42,9 @@ var upload = multer({
 }).single("file"); //Field name and max count
 // const upload = multer({ dest: 'uploads/' })
 app.get("/", (req, res) => {
+
+  let data2=[];
+
   if (!authed) {
     // Generate an OAuth URL and redirect there
     var url = oAuth2Client.generateAuthUrl({
@@ -57,17 +61,51 @@ app.get("/", (req, res) => {
     oauth2.userinfo.get(function (err, response) {
       if (err) {
         console.log(err);
+
+
       } else {
+
+        const drive = google.drive({version: 'v3', auth:oAuth2Client });
+  
+        drive.files.list({
+          pageSize: 10,
+          fields: 'nextPageToken, files(id, name)',
+        }, async (err, res) => {
+          if (err) return console.log('The API returned an error: ' + err);
+          const files = res.data.files;
+          if (files.length) {
+            console.log('Files:');
+            data2=await files
+            
+            
+          
+          
+          } else {
+            console.log('No files found.');
+          }
+        });
+
+
         console.log(response.data);
         name = response.data.name
         pic = response.data.picture
         res.render("success", {
           name: response.data.name,
           pic: response.data.picture,
-          success:false
+          success:false,
+         
         });
       }
     });
+
+
+
+    // const drive = google.drive({version: 'v3', auth:oAuth2Client });
+   
+
+
+
+
   }
 });
 
@@ -132,6 +170,32 @@ app.get("/oauth", function (req, res) {
       }
     });
   }
+});
+
+app.get("/all", (req, ress) => {
+  const drive = google.drive({version: 'v3', auth:oAuth2Client });
+  drive.files.list({
+    pageSize: 10,
+    fields: 'nextPageToken, files(id, name)',
+  }, (err, res) => {
+    if (err) return console.log('The API returned an error: ' + err);
+    const files = res.data.files;
+    ress.render("list", {
+      success:false,
+      data:files
+    });
+  //   if (files.length) {
+  //     console.log('Files:');
+  //     data=files
+
+    
+    
+  
+  //   } else {
+  //     console.log('No files found.');
+  //   }
+  });
+          
 });
 
 app.listen(8082, () => {
