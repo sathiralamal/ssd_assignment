@@ -21,25 +21,26 @@
     <div class="container">
       <div class="page-header text-center">
         <h1><span class="fa"></span> File List In Google drive</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+        <a href="/logout" class="btn btn-default btn-sm" style="color: brown;">Logout</a>
       </div>
 
             <table class="table table-dark table-striped">
         <thead>
         <tr class="table-active">
-          <th>ID</th>
-          <th>name</th>
+          <th style="border: 0ch; color: blue;">ID</th>
+          <th style="border: 0ch; color: blue;">Name</th>
         </tr>
       </thead>
       <tbody>
    
         <% for (var i = 0; i < data.length; i++) { %>
             <tr scope="row">
-              <td>
+              <td><b>
               <%= data[i].id %>
-            </td>
-            <td>
+            </td></b>
+            <td> <b>
               <%= data[i].name %>
+              </b>
             </td>
             </tr>
   
