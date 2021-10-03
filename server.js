@@ -61,7 +61,6 @@ app.get("/", (req, res) => {
       if (err) {
         console.log(err);
 
-
       } else {
 
         const drive = google.drive({version: 'v3', auth:oAuth2Client });
@@ -77,7 +76,7 @@ app.get("/", (req, res) => {
             data2=await files
           
           } else {
-            console.log('No files found.');
+            console.log('No files have been found.');
           }
         });
 
@@ -92,23 +91,14 @@ app.get("/", (req, res) => {
         });
       }
     });
-
-
-
-    // const drive = google.drive({version: 'v3', auth:oAuth2Client });
    
-
-
-
-
   }
 });
 
 app.post("/upload", (req, res) => {
   upload(req, res, function (err) {
     if (err) {
-        console.log("heloloooooooooooooooooooooooooooooooooooo")
-      console.log(err);
+      console.log("Error has been found: " + err);
       return res.end("Something went wrong");
     } else {
       console.log(req.file.path);
@@ -158,8 +148,6 @@ app.get("/oauth", function (req, res) {
         console.log("Successfully authenticated");
         console.log(tokens)
         oAuth2Client.setCredentials(tokens);
-
-
         authed = true;
         res.redirect("/");
       }
@@ -180,16 +168,6 @@ app.get("/all", (req, ress) => {
       success:false,
       data:files
     });
-  //   if (files.length) {
-  //     console.log('Files:');
-  //     data=files
-
-    
-    
-  
-  //   } else {
-  //     console.log('No files found.');
-  //   }
   });
           
 });

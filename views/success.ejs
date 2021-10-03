@@ -10,6 +10,7 @@
       rel="stylesheet"
       href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"
     />
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <style>
       body {
         padding-top: 80px;
@@ -28,17 +29,21 @@
   
       <div class="row">
         <!-- GOOGLE INFORMATION -->
-        <div class="col-sm-6">
-          <div class="well">
+        <div class="col-sm-6 ">
+          <div class="well text-center">
             <h3 class="text-danger">
               <span class="fa fa-google-plus"></span> Google
             </h3>
 
             <p>
-              <strong>name</strong>: <%= name %>
-              <br />
-              <strong>pic:</strong>:
-              <img src="<%=pic%>" width="200" height="200" alt="" />
+              
+              
+           
+              <img src="<%=pic%>" style="border-radius: 50%;" width="200" height="200" alt="" />
+            
+              <p style="font-family: 'poppins';font-size: 28px;">
+             <%= name %>
+            </p>
             </p>
           </div>
         </div>
