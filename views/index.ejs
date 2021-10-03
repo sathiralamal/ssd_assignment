@@ -5,20 +5,58 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
     <style>
-        body        { padding-top:80px; }
+        body        { 
+            padding-top:80px; 
+          
+        }
+
+    .image_back {
+    background-image: url("https://images.unsplash.com/photo-1604076984203-587c92ab2e58?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2731&q=80") !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height:100vh;  /* responsive height */
+}
+
+.image_back_google {
+    background-image: url("https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Google_Drive.max-1100x1100.png") !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 100%;
+    height:10vh;  /* responsive height */
+}
     </style>
 </head>
-<body>
+<body class="image_back">
 <div class="container">
 
-    <div class="jumbotron text-center">
+    <!-- <div class="jumbotron text-center">
         <h1><span class="fa fa-lock"></span> Node Google Drive Upload</h1>
 
         <p>Login or Register with:</p>
 
         <a href="<%=url%>" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google</a>
-
+      
+   -->
+    
+    <div class="jumbotron text-center">
+        <div class="card text-center">
+            <div class="card-header">
+              Oauth Google Drive File Manager
+            </div>
+            <div class="image_back_google" ></div>
+            <div class="card-body">
+               
+              <p class="card-text">outh service provide secure google drive file access</p>
+              <a href="<%=url%>" class="btn btn-primary">Google</a>
+            </div>
+           
+          </div>
     </div>
+
+</div>
 
 </div>
 </body>
