@@ -10,7 +10,6 @@ const { datastore } = require("googleapis/build/src/apis/datastore");
 
 const app = express();
 
-
 const CLIENT_ID = OAuth2Data.web.client_id;
 const CLIENT_SECRET = OAuth2Data.web.client_secret;
 const REDIRECT_URL = OAuth2Data.web.redirect_uris[0];
@@ -76,15 +75,11 @@ app.get("/", (req, res) => {
           if (files.length) {
             console.log('Files:');
             data2=await files
-            
-            
-          
           
           } else {
             console.log('No files found.');
           }
         });
-
 
         console.log(response.data);
         name = response.data.name
