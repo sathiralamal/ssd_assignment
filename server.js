@@ -180,6 +180,7 @@ app.get("/all", (req, ress) => {
   }, (err, res) => {
     if (err) return console.log('The API returned an error: ' + err);
     const files = res.data.files;
+    console.log(files)
     ress.render("list", {
       success:false,
       data:files
