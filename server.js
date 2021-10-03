@@ -3,6 +3,7 @@ const fs = require("fs");
 const express = require("express");
 const multer = require("multer");
 const OAuth2Data = require("./client_secret.json");
+
 var name,pic,data=[]
 
 const { google } = require("googleapis");
@@ -13,7 +14,7 @@ const app = express();
 const CLIENT_ID = OAuth2Data.web.client_id;
 const CLIENT_SECRET = OAuth2Data.web.client_secret;
 const REDIRECT_URL = OAuth2Data.web.redirect_uris[0];
-
+const TOKEN_PATH = 'token.json';
 const oAuth2Client = new google.auth.OAuth2(
   CLIENT_ID,
   CLIENT_SECRET,
@@ -50,6 +51,7 @@ app.get("/", (req, res) => {
       access_type: "offline",
       scope: SCOPES,
     });
+    console.log("helloooooooooooooooooooo")
     console.log(url);
     res.render("index", { url: url });
   } else {
@@ -148,6 +150,12 @@ app.get("/oauth", function (req, res) {
         console.log("Successfully authenticated");
         console.log(tokens)
         oAuth2Client.setCredentials(tokens);
+        fs.writeFile(TOKEN_PATH, JSON.stringify(tokens), (err) => {
+        if (err) {
+            console.error(err);
+        }
+        console.log('Token stored to', TOKEN_PATH);
+    });
         authed = true;
         res.redirect("/");
       }
