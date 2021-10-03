@@ -51,7 +51,6 @@ app.get("/", (req, res) => {
       access_type: "offline",
       scope: SCOPES,
     });
-    console.log("helloooooooooooooooooooo")
     console.log(url);
     res.render("index", { url: url });
   } else {
