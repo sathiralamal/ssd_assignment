@@ -12,17 +12,26 @@
     />
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <style>
+
+.image_back {
+    background-image: url("https://wallpaperaccess.com/full/30004.jpg") !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height:100vh;  /* responsive height */
+}
       body {
         padding-top: 80px;
         word-wrap: break-word;
       }
     </style>
   </head>
-  <body>
-    <div class="container">
+  <body class="image_back">
+    <div class="container ">
       <div class="page-header text-center">
         <h1><span class="fa"></span> Profile Page</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+        <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
       </div>
 
 
